@@ -80,10 +80,12 @@ export class App extends Component {
         <ContactForm onSubmit={this.addContacts} />
         <Title>Contacts</Title>
         <Filter value={filter} onChange={this.changeFilter} />
-        <ContactList
-          contacts={visibleTodos}
-          onDeleteContact={this.deleteContacts}
-        />
+        {visibleTodos.length > 0 && (
+          <ContactList
+            contacts={visibleTodos}
+            onDeleteContact={this.deleteContacts}
+          />
+        )}
         <ToastContainer theme="colored" autoClose={3000} />
       </Box>
     );
