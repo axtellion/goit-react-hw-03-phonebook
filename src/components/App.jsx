@@ -13,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 export class App extends Component {
   state = {
     contacts: [],
+
     filter: '',
   };
 
@@ -65,19 +66,16 @@ export class App extends Component {
 
     const normalizedFilter = filter.toLowerCase();
 
-    if (contacts.length > 0) {
-      return contacts.filter(contact =>
-        contact.name.toLowerCase().includes(normalizedFilter)
-      );
-    } else {
-      return contacts;
-    }
+    return contacts.filter(contact => {
+      return contact.name.toLowerCase().includes(normalizedFilter);
+    });
   };
 
   render() {
     const { filter } = this.state;
 
     const visibleTodos = this.getVisibleContact();
+    console.log(visibleTodos);
 
     return (
       <Box as={'main'} width="1024px" mx="auto" bg="#63c6c6" p="20px">
