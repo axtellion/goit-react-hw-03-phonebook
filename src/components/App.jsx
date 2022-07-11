@@ -7,6 +7,9 @@ import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export class App extends Component {
   state = {
     contacts: [],
@@ -20,9 +23,10 @@ export class App extends Component {
     this.setState({ contacts: parsedContacts });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.contacts !== prevState.contacts) {
-      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+  componentDidUpdate(_, prevState) {
+    const { contacts } = this.state;
+    if (contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(contacts));
     }
   }
 
@@ -31,7 +35,7 @@ export class App extends Component {
       contact => contact.name === name
     );
     if (errorName) {
-      alert('This contact is already added');
+      toast.error('This contact is already added');
       return;
     }
 
@@ -80,6 +84,7 @@ export class App extends Component {
           contacts={visibleTodos}
           onDeleteContact={this.deleteContacts}
         />
+        <ToastContainer theme="colored" autoClose={3000} />
       </Box>
     );
   }
