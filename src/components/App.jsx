@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 export class App extends Component {
   state = {
     contacts: [],
-    filter: '',
+    filtr: '',
   };
 
   componentDidMount() {
@@ -61,9 +61,9 @@ export class App extends Component {
   };
 
   getVisibleContact = () => {
-    const { contacts, filter } = this.state;
+    const { contacts, filtr } = this.state;
 
-    const normalizedFilter = filter.toLowerCase();
+    const normalizedFilter = filtr.toLowerCase();
 
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
@@ -71,7 +71,7 @@ export class App extends Component {
   };
 
   render() {
-    const { filter } = this.state;
+    const { filtr } = this.state;
 
     const visibleTodos = this.getVisibleContact();
 
@@ -79,7 +79,7 @@ export class App extends Component {
       <Box as={'main'} width="1024px" mx="auto" bg="#63c6c6" p="20px">
         <ContactForm onSubmit={this.addContacts} />
         <Title>Contacts</Title>
-        <Filter value={filter} onChange={this.changeFilter} />
+        <Filter value={filtr} onChange={this.changeFilter} />
         {visibleTodos.length > 0 && (
           <ContactList
             contacts={visibleTodos}
