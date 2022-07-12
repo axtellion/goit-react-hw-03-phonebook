@@ -83,7 +83,7 @@ export class App extends Component {
     const visibleTodos = this.getVisibleContact();
 
     return (
-      <Box as={'main'} width="1024px" mx="auto" bg="#63c6c6" p="20px">
+      <Box as="main" width="1024px" mx="auto" bg="#63c6c6" p="20px">
         <ContactForm onSubmit={this.addContacts} />
         <Title>Contacts</Title>
         <Filter value={filter} onChange={this.changeFilter} />
