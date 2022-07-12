@@ -13,7 +13,6 @@ import 'react-toastify/dist/ReactToastify.css';
 export class App extends Component {
   state = {
     contacts: [],
-
     filter: '',
   };
 
@@ -39,16 +38,18 @@ export class App extends Component {
       toast.error('This contact is already added');
       return;
     }
-
-    const contacts = {
-      id: nanoid(),
-      name,
-      number,
-    };
-
-    this.setState(prevState => ({
-      contacts: [contacts, ...prevState.contacts],
-    }));
+    this.setState(({ contacts }) => {
+      return {
+        contacts: [
+          {
+            id: nanoid(),
+            name,
+            number,
+          },
+          ...contacts,
+        ],
+      };
+    });
   };
 
   deleteContacts = contactsId => {
