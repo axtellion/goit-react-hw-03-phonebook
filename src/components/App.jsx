@@ -62,11 +62,9 @@ export class App extends Component {
 
   getVisibleContact = () => {
     const { contacts, filter } = this.state;
-
-    const normalizedFilter = filter.toLowerCase();
-
+    const normalizedFilter = filter.toLocaleLowerCase();
     return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter)
+      contact.name.toLocaleLowerCase().includes(normalizedFilter)
     );
   };
 
