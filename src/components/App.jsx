@@ -38,18 +38,16 @@ export class App extends Component {
       toast.error('This contact is already added');
       return;
     }
-    this.setState(({ contacts }) => {
-      return {
-        contacts: [
-          {
-            id: nanoid(),
-            name,
-            number,
-          },
-          ...contacts,
-        ],
-      };
-    });
+
+    const contacts = {
+      id: nanoid(),
+      name,
+      number,
+    };
+
+    this.setState(prevState => ({
+      contacts: [contacts, ...prevState.contacts],
+    }));
   };
 
   deleteContacts = contactsId => {
@@ -59,7 +57,7 @@ export class App extends Component {
   };
 
   changeFilter = e => {
-    this.setState({ filter: e.target.value });
+    this.setState({ filter: e.currentTarget.value });
   };
 
   getVisibleContact = () => {
@@ -67,16 +65,15 @@ export class App extends Component {
 
     const normalizedFilter = filter.toLowerCase();
 
-    return contacts.filter(contact => {
-      return contact.name.toLowerCase().includes(normalizedFilter);
-    });
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter)
+    );
   };
 
   render() {
     const { filter } = this.state;
 
     const visibleTodos = this.getVisibleContact();
-    console.log(visibleTodos);
 
     return (
       <Box as={'main'} width="1024px" mx="auto" bg="#63c6c6" p="20px">
